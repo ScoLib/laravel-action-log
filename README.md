@@ -50,7 +50,7 @@ If you discover any security related issues, please email slice1213@gmail.com in
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-styleci]: https://styleci.io/repos/82435198/shield?branch=master
+[ico-styleci]: https://styleci.io/repos/89337140/shield?branch=master
 [ico-version]: https://img.shields.io/packagist/v/ScoLib/laravel-action-log.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/ScoLib/laravel-action-log/master.svg?style=flat-square
@@ -58,7 +58,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/ScoLib/laravel-action-log.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/ScoLib/laravel-action-log.svg?style=flat-square
 
-[link-styleci]: https://styleci.io/repos/82435198
+[link-styleci]: https://styleci.io/repos/89337140
 [link-packagist]: https://packagist.org/packages/ScoLib/laravel-action-log
 [link-travis]: https://travis-ci.org/ScoLib/laravel-action-log
 [link-scrutinizer]: https://scrutinizer-ci.com/g/ScoLib/laravel-action-log/code-structure
