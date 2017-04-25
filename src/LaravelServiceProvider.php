@@ -3,8 +3,15 @@
 
 namespace Sco\ActionLog;
 
+use Illuminate\Support\ServiceProvider;
 
-class LaravelServiceProvider
+class LaravelServiceProvider extends ServiceProvider
 {
+    public function boot()
+    {
+    }
 
+    public function register()
+    {
+    }
 }
