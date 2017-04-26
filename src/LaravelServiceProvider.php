@@ -3,13 +3,17 @@
 
 namespace Sco\ActionLog;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Sco\ActionLog\Events\ActionLogEvent;
+use Sco\ActionLog\Listeners\SaveActionLog;
 
 class LaravelServiceProvider extends ServiceProvider
 {
-    public function boot()
-    {
-    }
+    protected $listen = [
+        ActionLogEvent::class => [
+            SaveActionLog::class
+        ]
+    ];
 
     public function register()
     {

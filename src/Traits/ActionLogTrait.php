@@ -3,13 +3,15 @@
 
 namespace Sco\ActionLog\Traits;
 
-use Illuminate\Database\Eloquent\Model;
+use Sco\ActionLog\Events\ModelCreatedEvent;
+use Sco\ActionLog\Events\ModelUpdatedEvent;
+use Sco\ActionLog\Events\ModelUpdatingEvent;
 
 trait ActionLogTrait
 {
-    public static function bootActionLogTrait()
-    {
-        static::saved(function (Model $model) {
-        });
-    }
+    protected $events = [
+        'created' => ModelCreatedEvent::class,
+        'updating' => ModelUpdatingEvent::class,
+        'updated' => ModelUpdatedEvent::class,
+    ];
 }
