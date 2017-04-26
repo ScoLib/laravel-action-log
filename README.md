@@ -26,6 +26,11 @@ providers
 ]
 ```
 
+```php
+php artisan vendor:publish --provider="Sco\ActionLog\LaravelServiceProvider"
+php artisan migrate
+```
+
 model file add $events
 
 ```php
