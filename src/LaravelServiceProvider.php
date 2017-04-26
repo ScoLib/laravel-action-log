@@ -35,6 +35,8 @@ class LaravelServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__ . '/../config/actionlog.php', 'actionlog');
+
         $this->app->singleton('actionlog', function () {
             return new Factory();
         });

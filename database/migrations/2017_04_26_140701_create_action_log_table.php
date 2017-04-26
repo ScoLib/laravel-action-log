@@ -31,8 +31,7 @@ class CreateActionLogTable extends Migration
             $table->string('ip', 20)
                 ->comment('操作者IP');
 
-            $table->timestamp('created_at')
-                ->comment('操作时间');
+            $table->timestamps();
 
             $table->index('user_id');
             $table->index('type');

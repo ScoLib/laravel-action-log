@@ -11,7 +11,9 @@ class Factory
         $log = new ActionLog();
         \Log::info(var_export(auth()->check(), true));
 
-        $log->user_id = auth()->user()->id;
+        $user = auth()->user();
+        $log->user_id = $user ? $user->getAuthIdentifier() : 0;
+
         $log->type = $type;
         $log->content = is_array($content) ? json_encode($content) : $content;
 
