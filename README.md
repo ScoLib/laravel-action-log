@@ -18,9 +18,22 @@ $ composer require scolib/laravel-action-log
 
 ## Usage
 
-``` php
-$skeleton = new Sco\ActionLog();
-echo $skeleton->echoPhrase('Hello, League!');
+config/app.php
+providers
+```php
+'providers' => [
+    \Sco\ActionLog\LaravelServiceProvider::class,
+]
+```
+
+model file add $events
+
+```php
+    protected $events = [
+        'created'  => \Sco\ActionLog\Events\ModelCreatedEvent::class,
+        'updating' => \Sco\ActionLog\Events\ModelUpdatingEvent::class,
+        'updated'  => \Sco\ActionLog\Events\ModelUpdatedEvent::class,
+    ];
 ```
 
 ## Change log
