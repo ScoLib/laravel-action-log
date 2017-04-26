@@ -31,7 +31,6 @@ class LaravelServiceProvider extends ServiceProvider
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
             $this->publishConfig();
         }
-
     }
 
     public function register()

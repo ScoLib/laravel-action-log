@@ -18,6 +18,5 @@ class Factory
         $log->ip = request()->getClientIp();
 
         $log->save();
-        
     }
 }

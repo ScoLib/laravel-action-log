@@ -3,7 +3,6 @@
 
 namespace Sco\ActionLog\Listeners;
 
-
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Sco\ActionLog\Events\ActionLogEvent;
 use ActionLog;

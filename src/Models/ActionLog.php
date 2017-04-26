@@ -3,7 +3,6 @@
 
 namespace Sco\ActionLog\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
 
 /**
