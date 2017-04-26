@@ -10,7 +10,7 @@ use Sco\ActionLog\Events\ActionLogEvent;
 class SaveActionLog implements ShouldQueue
 {
 
-    public function handler(ActionLogEvent $event)
+    public function handle(ActionLogEvent $event)
     {
         \Log::info($event->type, $event->model->getOriginal());
     }
