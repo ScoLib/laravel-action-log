@@ -37,7 +37,6 @@ class CreateActionLogTable extends Migration
             $table->index('user_id');
             $table->index('type');
             $table->index('created_at');
-
         });
     }
 
