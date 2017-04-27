@@ -23,7 +23,10 @@ abstract class AbstractEvent
 
     public function getContent()
     {
-        return $this->model->getOriginal();
+        return [
+            'from' => $this->model->getOriginal(),
+            'to'   => $this->model->getAttributes(),
+        ];
     }
 
     /**

@@ -12,12 +12,19 @@ class Factory
      * Logging Action By Event
      *
      * @param \Sco\ActionLog\Events\AbstractEvent $event
+     *
+     * @return bool
      */
     public function event(AbstractEvent $event)
     {
+        $userId = $event->getLogValue('user_id', 0);
+        if (!$userId && !config('actionlog.guest')) {
+            return false;
+        }
+
         $log = new ActionLog();
 
-        $log->user_id    = $event->getLogValue('user_id', 0);
+        $log->user_id    = $userId;
         $log->type       = $event->type;
         $log->table_name = $event->model->getTable();
         $log->content    = json_encode($event->getContent());
@@ -25,6 +32,7 @@ class Factory
 
         $log->save();
 
+        return true;
     }
 
     /**
@@ -33,17 +41,26 @@ class Factory
      * @param string       $type
      * @param string|array $content
      * @param string       $tableName
+     *
+     * @return bool
      */
     public function info($type, $content, $tableName = '')
     {
         $log = new ActionLog();
 
-        $log->user_id    = Auth::id() ? Auth::id() : 0;
+        $userId = Auth::id();
+        if (!$userId && !config('actionlog.guest')) {
+            return false;
+        }
+
+        $log->user_id    = $userId;
         $log->type       = $type;
         $log->table_name = $tableName;
         $log->content    = is_array($content) ? json_encode($content) : $content;
         $log->ip         = request()->getClientIp();
 
         $log->save();
+
+        return true;
     }
 }
