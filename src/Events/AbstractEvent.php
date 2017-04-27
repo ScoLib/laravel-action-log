@@ -3,19 +3,20 @@
 
 namespace Sco\ActionLog\Events;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Queue\SerializesModels;
 
-abstract class ActionLogEvent
+abstract class AbstractEvent
 {
-    use SerializesModels;
-
     public $model;
+
+    public $userId;
 
     public $type;
 
     public function __construct(Model $model)
     {
         $this->model = $model;
+        $this->userId = Auth::id();
     }
 }

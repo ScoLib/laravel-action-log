@@ -3,7 +3,7 @@
 
 namespace Sco\ActionLog\Events;
 
-class ModelDeletingEvent extends ActionLogEvent
+class ModelWillDeleting extends AbstractEvent
 {
     public $type = 'deleting';
 }

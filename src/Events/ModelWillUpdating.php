@@ -3,7 +3,7 @@
 
 namespace Sco\ActionLog\Events;
 
-class ModelUpdatingEvent extends ActionLogEvent
+class ModelWillUpdating extends AbstractEvent
 {
     public $type = 'updating';
 }

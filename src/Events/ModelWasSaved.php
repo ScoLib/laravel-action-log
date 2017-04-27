@@ -3,7 +3,7 @@
 
 namespace Sco\ActionLog\Events;
 
-class ModelSavedEvent extends ActionLogEvent
+class ModelWasSaved extends AbstractEvent
 {
     public $type = 'saved';
 }

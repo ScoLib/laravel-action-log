@@ -9,16 +9,16 @@ use Sco\ActionLog\Listeners\SaveActionLog;
 class LaravelServiceProvider extends ServiceProvider
 {
     protected $events = [
-        \Sco\ActionLog\Events\ModelCreatingEvent::class,
-        \Sco\ActionLog\Events\ModelCreatedEvent::class,
-        \Sco\ActionLog\Events\ModelUpdatingEvent::class,
-        \Sco\ActionLog\Events\ModelUpdatedEvent::class,
-        \Sco\ActionLog\Events\ModelSavingEvent::class,
-        \Sco\ActionLog\Events\ModelSavedEvent::class,
-        \Sco\ActionLog\Events\ModelDeletingEvent::class,
-        \Sco\ActionLog\Events\ModelDeletedEvent::class,
-        \Sco\ActionLog\Events\ModelRestoringEvent::class,
-        \Sco\ActionLog\Events\ModelRestoredEvent::class,
+        \Sco\ActionLog\Events\ModelWillCreating::class,
+        \Sco\ActionLog\Events\ModelWasCreated::class,
+        \Sco\ActionLog\Events\ModelWillUpdating::class,
+        \Sco\ActionLog\Events\ModelWasUpdated::class,
+        \Sco\ActionLog\Events\ModelWillSaving::class,
+        \Sco\ActionLog\Events\ModelWasSaved::class,
+        \Sco\ActionLog\Events\ModelWillDeleting::class,
+        \Sco\ActionLog\Events\ModelWasDeleted::class,
+        \Sco\ActionLog\Events\ModelWillRestoring::class,
+        \Sco\ActionLog\Events\ModelWasRestored::class,
     ];
 
     public function boot()

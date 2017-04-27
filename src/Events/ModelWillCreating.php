@@ -3,7 +3,7 @@
 
 namespace Sco\ActionLog\Events;
 
-class ModelCreatingEvent extends ActionLogEvent
+class ModelWillCreating extends AbstractEvent
 {
     public $type = 'creating';
 }

@@ -2,22 +2,27 @@
 
 namespace Sco\ActionLog;
 
-use Illuminate\Database\Eloquent\Model;
+use Auth;
+use Sco\ActionLog\Events\AbstractEvent;
 use Sco\ActionLog\Models\ActionLog;
 
 class Factory
 {
-    public function model($type, Model $model)
+    public function event(AbstractEvent $event)
     {
-        $this->info($type, $model->getOriginal(), $model->getTable());
+        $this->info(
+            $event->type,
+            $event->model->getOriginal(),
+            $event->model->getTable(),
+            $event->userId
+        );
     }
 
-    public function info($type, $content, $tableName = '')
+    public function info($type, $content, $tableName = '', $userId = null)
     {
         $log = new ActionLog();
 
-        $user = auth()->user();
-        $log->user_id = $user ? $user->getAuthIdentifier() : 0;
+        $log->user_id = $userId ?: (Auth::id() ? Auth::id() : 0);
 
         $log->type       = $type;
         $log->table_name = $tableName;
