@@ -16,34 +16,67 @@ Via Composer
 $ composer require scolib/laravel-action-log
 ```
 
-## Usage
+After updating composer, add the ServiceProvider to the `providers` array in `config/app.php`
 
-config/app.php
-providers
 ```php
-'providers' => [
-    \Sco\ActionLog\LaravelServiceProvider::class,
-]
+\Sco\ActionLog\LaravelServiceProvider::class,
 ```
-alias
+
+If you want to use the facade to logging actions, add this to the `aliases` array in `config/app.php`
+
 ```php
 'ActionLog' => Sco\ActionLog\Facade::class,
 ```
 
+Copy the package config to your local config with the publish command:
+
 ```php
 php artisan vendor:publish --provider="Sco\ActionLog\LaravelServiceProvider"
+```
+
+Default action log table name is `action_logs`, If you want to customize it, edit the `config/actionlog.php`
+
+Now run the artisan migrate command:
+```php
 php artisan migrate
 ```
 
-model file add $events
+## Usage
+
+###Method 1
+
+Override the property `$events` in your Model
 
 ```php
     protected $events = [
-        'created'  => \Sco\ActionLog\Events\ModelCreatedEvent::class,
-        'updating' => \Sco\ActionLog\Events\ModelUpdatingEvent::class,
-        'updated'  => \Sco\ActionLog\Events\ModelUpdatedEvent::class,
+        'created'  => \Sco\ActionLog\Events\ModelWasCreated::class,
     ];
 ```
+
+All available event
+
+```php
+[
+    'created'   => \Sco\ActionLog\Events\ModelWasCreated::class
+    'deleted'   => \Sco\ActionLog\Events\ModelWasDeleted::class
+    'restored'  => \Sco\ActionLog\Events\ModelWasRestored::class
+    'saved'     => \Sco\ActionLog\Events\ModelWasSaved::class
+    'updated'   => \Sco\ActionLog\Events\ModelWasUpdated::class
+    'creating'  => \Sco\ActionLog\Events\ModelWillCreating::class
+    'deleting'  => \Sco\ActionLog\Events\ModelWillDeleting::class
+    'restoring' => \Sco\ActionLog\Events\ModelWillRestoring::class
+    'saving'    => \Sco\ActionLog\Events\ModelWillSaving::class
+    'updating'  => \Sco\ActionLog\Events\ModelWillUpdating::class
+]
+```
+
+###Method 2
+Manual logging actions
+
+```php
+ActionLog::info($type, $content, $tableName = '')
+```
+
 
 ## Change log
 
