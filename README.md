@@ -25,6 +25,10 @@ providers
     \Sco\ActionLog\LaravelServiceProvider::class,
 ]
 ```
+alias
+```php
+'ActionLog' => Sco\ActionLog\Facade::class,
+```
 
 ```php
 php artisan vendor:publish --provider="Sco\ActionLog\LaravelServiceProvider"

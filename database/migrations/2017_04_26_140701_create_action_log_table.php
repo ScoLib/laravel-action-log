@@ -25,6 +25,9 @@ class CreateActionLogTable extends Migration
             $table->string('type', 50)
                 ->comment('操作类型');
 
+            $table->string('table_name', 50)
+                ->comment('相关的数据表');
+
             $table->string('content', 500)
                 ->comment('操作描述');
 

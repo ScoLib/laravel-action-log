@@ -12,6 +12,6 @@ class SaveActionLog implements ShouldQueue
 
     public function handle(ActionLogEvent $event)
     {
-        ActionLog::info($event->type, $event->model->getOriginal());
+        ActionLog::model($event->type, $event->model);
     }
 }
