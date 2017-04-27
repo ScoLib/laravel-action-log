@@ -4,27 +4,27 @@
 namespace Sco\ActionLog;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Sco\ActionLog\Events\ModelCreatedEvent;
-use Sco\ActionLog\Events\ModelUpdatedEvent;
-use Sco\ActionLog\Events\ModelUpdatingEvent;
 use Sco\ActionLog\Listeners\SaveActionLog;
 
 class LaravelServiceProvider extends ServiceProvider
 {
-    protected $listen = [
-        ModelCreatedEvent::class  => [
-            SaveActionLog::class,
-        ],
-        ModelUpdatingEvent::class => [
-            SaveActionLog::class,
-        ],
-        ModelUpdatedEvent::class  => [
-            SaveActionLog::class,
-        ],
+    protected $events = [
+        \Sco\ActionLog\Events\ModelCreatingEvent::class,
+        \Sco\ActionLog\Events\ModelCreatedEvent::class,
+        \Sco\ActionLog\Events\ModelUpdatingEvent::class,
+        \Sco\ActionLog\Events\ModelUpdatedEvent::class,
+        \Sco\ActionLog\Events\ModelSavingEvent::class,
+        \Sco\ActionLog\Events\ModelSavedEvent::class,
+        \Sco\ActionLog\Events\ModelDeletingEvent::class,
+        \Sco\ActionLog\Events\ModelDeletedEvent::class,
+        \Sco\ActionLog\Events\ModelRestoringEvent::class,
+        \Sco\ActionLog\Events\ModelRestoredEvent::class,
     ];
 
     public function boot()
     {
+        $this->listen = $this->parseEvents();
+
         parent::boot();
 
         if ($this->app->runningInConsole()) {
@@ -33,11 +33,26 @@ class LaravelServiceProvider extends ServiceProvider
         }
     }
 
+    private function parseEvents()
+    {
+        $listens = [];
+        $events = array_merge($this->events, config('actionlog.events'));
+        foreach ($events as $event) {
+            $listens[$event] = [
+                SaveActionLog::class,
+            ];
+        }
+        return $listens;
+    }
+
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/actionlog.php', 'actionlog');
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/actionlog.php',
+            'actionlog'
+        );
 
-        $this->app->singleton('actionlog', function () {
+        $this->app->singleton('ActionLog', function () {
             return new Factory();
         });
     }

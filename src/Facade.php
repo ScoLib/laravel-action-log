@@ -9,6 +9,6 @@ class Facade extends BaseFacade
 {
     protected static function getFacadeAccessor()
     {
-        return 'actionlog';
+        return 'ActionLog';
     }
 }
