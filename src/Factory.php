@@ -4,7 +4,7 @@ namespace Sco\ActionLog;
 
 use Auth;
 use Sco\ActionLog\Events\AbstractEvent;
-use Sco\ActionLog\Models\ActionLog;
+use Sco\ActionLog\Models\ActionLogModel;
 
 class Factory
 {
@@ -22,7 +22,7 @@ class Factory
             return false;
         }
 
-        $log = new ActionLog();
+        $log = new ActionLogModel();
 
         $log->user_id    = $userId;
         $log->type       = $event->getAttribute('type', '');
@@ -46,7 +46,7 @@ class Factory
      */
     public function info($type, $content, $tableName = '')
     {
-        $log = new ActionLog();
+        $log = new ActionLogModel();
 
         $userId = Auth::id();
         if (!$userId && !config('actionlog.guest')) {
@@ -62,5 +62,16 @@ class Factory
         $log->save();
 
         return true;
+    }
+
+    public function __call($method, $parameters)
+    {
+        return (new ActionLogModel)->$method(...$parameters);
+    }
+
+
+    public static function __callStatic($method, $parameters)
+    {
+        return (new static)->$method(...$parameters);
     }
 }
