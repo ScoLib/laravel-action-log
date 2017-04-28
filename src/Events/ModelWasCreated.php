@@ -5,11 +5,10 @@ namespace Sco\ActionLog\Events;
 
 class ModelWasCreated extends AbstractEvent
 {
-    public $type = 'created';
-
+    protected $type = 'created';
 
     public function getContent()
     {
-        return $this->model->getAttributes();
+        return $this->getAttribute('model.attributes');
     }
 }

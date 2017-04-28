@@ -5,5 +5,5 @@ namespace Sco\ActionLog\Events;
 
 class ModelWasRestored extends AbstractEvent
 {
-    public $type = 'restored';
+    protected $type = 'restored';
 }

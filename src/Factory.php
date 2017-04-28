@@ -17,7 +17,7 @@ class Factory
      */
     public function event(AbstractEvent $event)
     {
-        $userId = $event->getLogValue('user_id', 0);
+        $userId = $event->getAttribute('user_id', 0);
         if (!$userId && !config('actionlog.guest')) {
             return false;
         }
@@ -25,10 +25,10 @@ class Factory
         $log = new ActionLog();
 
         $log->user_id    = $userId;
-        $log->type       = $event->type;
-        $log->table_name = $event->model->getTable();
+        $log->type       = $event->getAttribute('type', '');
+        $log->table_name = $event->getAttribute('model.table', '');
         $log->content    = json_encode($event->getContent());
-        $log->ip         = $event->getLogValue('ip', '');
+        $log->client_ip  = $event->getAttribute('client_ip', '');
 
         $log->save();
 
@@ -57,7 +57,7 @@ class Factory
         $log->type       = $type;
         $log->table_name = $tableName;
         $log->content    = is_array($content) ? json_encode($content) : $content;
-        $log->ip         = request()->getClientIp();
+        $log->client_ip  = request()->getClientIp();
 
         $log->save();
 
