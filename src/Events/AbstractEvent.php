@@ -19,7 +19,7 @@ abstract class AbstractEvent
             'model.original'   => $model->getOriginal(),
             'model.attributes' => $model->getAttributes(),
             'model.table'      => $model->getTable(),
-            'user_id'          => Auth::id(),
+            'user_id'          => intval(Auth::id()),
             'client_ip'        => request()->getClientIp(),
             'type'             => $this->type,
         ]);
