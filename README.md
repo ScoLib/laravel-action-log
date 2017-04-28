@@ -43,7 +43,7 @@ php artisan migrate
 
 ## Usage
 
-###Method 1
+### Method 1
 
 Override the property `$events` in your Model
 
@@ -70,7 +70,7 @@ All available event
 ]
 ```
 
-###Method 2
+### Method 2
 Manual logging actions
 
 ```php
