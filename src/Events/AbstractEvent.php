@@ -34,6 +34,4 @@ abstract class AbstractEvent
             'to'   => $this->getAttribute('model.attributes'),
         ];
     }
-
-
 }

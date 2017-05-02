@@ -3,7 +3,6 @@
 
 namespace Sco\ActionLog;
 
-
 use Sco\ActionLog\Traits\HasAttributes;
 
 class LogInfo
@@ -44,6 +43,4 @@ class LogInfo
     {
         return $this->getAttribute('client');
     }
-
-
 }

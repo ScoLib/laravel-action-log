@@ -3,7 +3,6 @@
 
 namespace Sco\ActionLog\Handlers;
 
-
 abstract class AbstractHandler implements HandlerInterface
 {
     protected function getClient()
