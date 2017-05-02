@@ -5,7 +5,7 @@ namespace Sco\ActionLog\Events;
 
 class ModelWillCreating extends AbstractEvent
 {
-    protected $type = 'creating';
+    public $type = 'creating';
 
     public function getContent()
     {

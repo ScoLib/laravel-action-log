@@ -5,7 +5,7 @@ namespace Sco\ActionLog\Events;
 
 class ModelWasDeleted extends AbstractEvent
 {
-    protected $type = 'deleted';
+    public $type = 'deleted';
 
     public function getContent()
     {

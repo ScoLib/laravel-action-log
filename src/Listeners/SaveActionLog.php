@@ -13,6 +13,6 @@ class SaveActionLog implements ShouldQueue
 
     public function handle(AbstractEvent $event)
     {
-        app('ActionLog')->event($event);
+        app('ActionLog')->info($event->logInfo);
     }
 }

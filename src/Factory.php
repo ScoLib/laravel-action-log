@@ -2,68 +2,40 @@
 
 namespace Sco\ActionLog;
 
-use Auth;
-use Sco\ActionLog\Events\AbstractEvent;
 use Sco\ActionLog\Models\ActionLogModel;
 
 class Factory
 {
-    /**
-     * Logging Action By Event
-     *
-     * @param \Sco\ActionLog\Events\AbstractEvent $event
-     *
-     * @return bool
-     */
-    public function event(AbstractEvent $event)
-    {
-        $userId = $event->getAttribute('user_id', 0);
-        if (!$userId && !config('actionlog.guest')) {
-            return false;
-        }
-
-        $log = new ActionLogModel();
-
-        $log->user_id    = $userId;
-        $log->type       = $event->getAttribute('type', '');
-        $log->table_name = $event->getAttribute('model.table', '');
-        $log->content    = json_encode($event->getContent());
-        $log->client_ip  = $event->getAttribute('client_ip', '');
-        $log->client     = json_encode($event->getAttribute('client', []));
-
-        $log->save();
-
-        return true;
-    }
 
     /**
      * Logging Action
      *
-     * @param string       $type
-     * @param string|array $content
-     * @param string       $tableName
+     * @param \Sco\ActionLog\LogInfo $info
      *
      * @return bool
      */
-    public function info($type, $content, $tableName = '')
+    public function info(LogInfo $info)
     {
         $log = new ActionLogModel();
 
-        $userId = Auth::id();
-        if (!$userId && !config('actionlog.guest')) {
+        if (!$info->getUserId() && !config('actionlog.guest')) {
             return false;
         }
 
-        $log->user_id    = $userId;
-        $log->type       = $type;
-        $log->table_name = $tableName;
-        $log->content    = is_array($content) ? json_encode($content) : $content;
-        $log->client_ip  = request()->getClientIp();
+        $content = $info->getContent();
+        $client  = $info->getClient();
 
+        $log->user_id    = $info->getUserId();
+        $log->type       = $info->getType();
+        $log->table_name = $info->getTableName();
+        $log->content    = is_string($content) ? $content : json_encode($content);
+        $log->client_ip  = $info->getClientIp();
+        $log->client     = is_string($client) ? $client : json_encode($client);
         $log->save();
 
         return true;
     }
+
 
     public function __call($method, $parameters)
     {
