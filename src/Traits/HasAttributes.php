@@ -3,6 +3,8 @@
 
 namespace Sco\ActionLog\Traits;
 
+use Illuminate\Support\Arr;
+
 trait HasAttributes
 {
     protected $attributes = [];

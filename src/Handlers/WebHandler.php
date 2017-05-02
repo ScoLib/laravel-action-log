@@ -3,6 +3,7 @@
 
 namespace Sco\ActionLog\Handlers;
 
+use Auth;
 use Sco\ActionLog\LogInfo;
 use Sco\ActionLog\Traits\HasAttributes;
 

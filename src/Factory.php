@@ -2,10 +2,20 @@
 
 namespace Sco\ActionLog;
 
+use Sco\ActionLog\Handlers\WebHandler;
 use Sco\ActionLog\Models\ActionLogModel;
 
 class Factory
 {
+
+    public function web($type, $content, $tableName = '')
+    {
+        return $this->info((new WebHandler([
+            'type'       => $type,
+            'content'    => $content,
+            'table_name' => $tableName
+        ]))->info());
+    }
 
     /**
      * Logging Action
