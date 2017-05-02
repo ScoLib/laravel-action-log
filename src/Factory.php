@@ -29,6 +29,7 @@ class Factory
         $log->table_name = $event->getAttribute('model.table', '');
         $log->content    = json_encode($event->getContent());
         $log->client_ip  = $event->getAttribute('client_ip', '');
+        $log->client     = json_encode($event->getAttribute('client', []));
 
         $log->save();
 

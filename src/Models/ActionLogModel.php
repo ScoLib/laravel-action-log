@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $type 操作类型
  * @property string $table_name 相关的数据表
  * @property string $content 操作描述
+ * @property string $client 客户端信息
  * @property string $client_ip 操作者IP
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at

@@ -23,6 +23,21 @@ abstract class AbstractEvent
             'client_ip'        => request()->getClientIp(),
             'type'             => $this->type,
         ]);
+
+        if (class_exists('\Jenssegers\Agent\Agent')) {
+            $agent = new \Jenssegers\Agent\Agent();
+
+            $device = $agent->device();
+            $platform = $agent->platform();
+            $browser = $agent->browser();
+
+            $this->setAttribute('client', [
+                'device' =>   $device . ' ' . $agent->version($device),
+                'platform' => $platform . ' ' . $agent->version($platform),
+                '$browser' => $browser . ' ' . $agent->version($browser),
+            ]);
+        }
+
     }
 
     public function getContent()
