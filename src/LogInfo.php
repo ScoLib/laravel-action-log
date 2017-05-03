@@ -19,11 +19,6 @@ class LogInfo
         return $this->getAttribute('user_id');
     }
 
-    public function getTableName()
-    {
-        return $this->getAttribute('table_name');
-    }
-
     public function getContent()
     {
         return $this->getAttribute('content');

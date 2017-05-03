@@ -36,8 +36,7 @@ class LaravelServiceProvider extends ServiceProvider
     private function parseEvents()
     {
         $listens = [];
-        $events = array_merge($this->events, config('actionlog.events'));
-        foreach ($events as $event) {
+        foreach ($this->events as $event) {
             $listens[$event] = [
                 SaveActionLog::class,
             ];
@@ -51,10 +50,6 @@ class LaravelServiceProvider extends ServiceProvider
             __DIR__ . '/../config/actionlog.php',
             'actionlog'
         );
-
-        $this->app->singleton('ActionLog', function () {
-            return new Factory();
-        });
     }
 
     private function publishConfig()

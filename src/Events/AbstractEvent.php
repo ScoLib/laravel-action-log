@@ -3,35 +3,69 @@
 
 namespace Sco\ActionLog\Events;
 
-use Illuminate\Database\Eloquent\Model;
-use Sco\ActionLog\Handlers\EventHandler;
-use Sco\ActionLog\Traits\HasAttributes;
+use Auth;
+use Request;
+use Sco\ActionLog\LogInfo;
 
-abstract class AbstractEvent
+abstract class AbstractEvent implements EventInterface
 {
-    use HasAttributes;
+    protected $type;
 
-    public $type;
-
+    /**
+     * @var \Sco\ActionLog\LogInfo
+     */
     public $logInfo;
 
-    public function __construct(Model $model)
+    abstract protected function getContent();
+
+    public function __construct()
     {
-        $this->setAttribute([
-            'model.original'   => $model->getOriginal(),
-            'model.attributes' => $model->getAttributes(),
-        ]);
-
-        $handler = new EventHandler($this, $model);
-
-        $this->logInfo = $handler->info();
+        $this->setLogInfo();
     }
 
-    public function getContent()
+    protected function getType()
     {
+        return $this->type;
+    }
+
+    protected function getClient()
+    {
+        if (class_exists('\Jenssegers\Agent\Agent')) {
+            $agent = new \Jenssegers\Agent\Agent();
+
+            $platform = $agent->platform();
+            $browser  = $agent->browser();
+
+            return [
+                'device'   => $agent->device(),
+                'platform' => $platform . ' ' . $agent->version($platform),
+                'browser'  => $browser . ' ' . $agent->version($browser),
+            ];
+        }
+
         return [
-            'from' => $this->getAttribute('model.original'),
-            'to'   => $this->getAttribute('model.attributes'),
+            'agent' => Request::header('User-Agent'),
         ];
+    }
+
+    protected function setLogInfo()
+    {
+        $this->logInfo = new LogInfo([
+            'type'      => $this->getType(),
+            'content'   => $this->getContent(),
+            'client_ip' => Request::getClientIp(),
+            'client'    => $this->getClient(),
+            'user_id'   => intval(Auth::id()),
+        ]);
+
+        return $this->logInfo;
+    }
+
+    /**
+     * @return \Sco\ActionLog\LogInfo
+     */
+    public function getLogInfo()
+    {
+        return $this->logInfo;
     }
 }

@@ -3,12 +3,7 @@
 
 namespace Sco\ActionLog\Events;
 
-class ModelWillDeleting extends AbstractEvent
+class ModelWillDeleting extends BaseModelEvent
 {
     public $type = 'deleting';
-
-    public function getContent()
-    {
-        return $this->getAttribute('model.original');
-    }
 }

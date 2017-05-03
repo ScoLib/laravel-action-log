@@ -74,19 +74,17 @@ All available event
 Manual logging actions
 
 ```php
-ActionLog::info($type, $content, $tableName = '')
+// use event
+event(new \Sco\ActionLog\Events\ManualEvent($type, $content));
+
+// use factory
+\Sco\ActionLog\Factory::info(LogInfo $info);
 ```
 
 
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Testing
-
-``` bash
-$ composer test
-```
 
 ## Contributing
 

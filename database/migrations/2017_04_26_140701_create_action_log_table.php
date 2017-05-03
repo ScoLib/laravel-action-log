@@ -18,15 +18,12 @@ class CreateActionLogTable extends Migration
 
             $table->increments('id');
 
-            $table->integer('user_id')
+            $table->integer(config('actionlog.user_foreign_key'))
                 ->unsigned()
                 ->comment('操作者ID');
 
             $table->string('type', 50)
                 ->comment('操作类型');
-
-            $table->string('table_name', 50)
-                ->comment('相关的数据表');
 
             $table->text('content')
                 ->comment('操作描述');

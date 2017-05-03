@@ -3,12 +3,7 @@
 
 namespace Sco\ActionLog\Events;
 
-class ModelWillCreating extends AbstractEvent
+class ModelWillCreating extends BaseModelEvent
 {
     public $type = 'creating';
-
-    public function getContent()
-    {
-        return $this->getAttribute('model.attributes');
-    }
 }

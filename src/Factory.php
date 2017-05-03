@@ -2,20 +2,10 @@
 
 namespace Sco\ActionLog;
 
-use Sco\ActionLog\Handlers\WebHandler;
 use Sco\ActionLog\Models\ActionLogModel;
 
 class Factory
 {
-
-    public function web($type, $content, $tableName = '')
-    {
-        return $this->info((new WebHandler([
-            'type'       => $type,
-            'content'    => $content,
-            'table_name' => $tableName
-        ]))->info());
-    }
 
     /**
      * Logging Action
@@ -24,7 +14,7 @@ class Factory
      *
      * @return bool
      */
-    public function info(LogInfo $info)
+    public static function info(LogInfo $info)
     {
         $log = new ActionLogModel();
 
@@ -35,12 +25,13 @@ class Factory
         $content = $info->getContent();
         $client  = $info->getClient();
 
-        $log->user_id    = $info->getUserId();
-        $log->type       = $info->getType();
-        $log->table_name = $info->getTableName();
-        $log->content    = is_string($content) ? $content : json_encode($content);
-        $log->client_ip  = $info->getClientIp();
-        $log->client     = is_string($client) ? $client : json_encode($client);
+        $userKey = config('actionlog.user_foreign_key');
+
+        $log->$userKey  = $info->getUserId();
+        $log->type      = $info->getType();
+        $log->content   = is_string($content) ? $content : json_encode($content);
+        $log->client_ip = $info->getClientIp();
+        $log->client    = is_string($client) ? $client : json_encode($client);
         $log->save();
 
         return true;
