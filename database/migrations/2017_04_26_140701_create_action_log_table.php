@@ -13,7 +13,7 @@ class CreateActionLogTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('actionlog.table_name'), function (Blueprint $table) {
+        Schema::create(config('actionlog.action_logs_table'), function (Blueprint $table) {
             $table->engine = "InnoDB COMMENT='用户操作记录表'";
 
             $table->increments('id');
@@ -49,6 +49,6 @@ class CreateActionLogTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('actionlog.table_name'));
+        Schema::dropIfExists(config('actionlog.action_logs_table'));
     }
 }
