@@ -2,6 +2,7 @@
 
 namespace Sco\ActionLog;
 
+use Illuminate\Support\Facades\Event;
 use Orchestra\Testbench\TestCase;
 use Sco\ActionLog\Events\ManualEvent;
 
@@ -51,7 +52,7 @@ class ActionLogTest extends TestCase
         ];
     }
 
-    public function testInfo()
+    public function testFactoryInfo()
     {
         $logInfo = new LogInfo([
             'type'      => 'test',
@@ -65,8 +66,11 @@ class ActionLogTest extends TestCase
 
     public function testManualEvent()
     {
-        $res = event(new ManualEvent('manual', ['content' => 'test']));
+        Event::fake();
+        event(new ManualEvent('manual', ['content' => 'test']));
 
-        $this->assertTrue(is_array($res));
+        Event::assertDispatched(ManualEvent::class, function ($event) {
+            return $event->getLogInfo() instanceof LogInfo;
+        });
     }
 }

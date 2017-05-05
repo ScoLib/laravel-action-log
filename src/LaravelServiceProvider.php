@@ -19,6 +19,7 @@ class LaravelServiceProvider extends ServiceProvider
         \Sco\ActionLog\Events\ModelWasDeleted::class,
         \Sco\ActionLog\Events\ModelWillRestoring::class,
         \Sco\ActionLog\Events\ModelWasRestored::class,
+        \Sco\ActionLog\Events\ManualEvent::class,
     ];
 
     public function boot()
