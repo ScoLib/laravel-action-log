@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $client_ip 操作者IP
  * @property string $client 客户端信息
  * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
  * @property-read \Sco\Admin\Models\Manager $user
  * @method static \Illuminate\Database\Query\Builder|\Sco\ActionLog\Models\ActionLogModel whereClient($value)
  * @method static \Illuminate\Database\Query\Builder|\Sco\ActionLog\Models\ActionLogModel whereClientIp($value)
@@ -23,12 +22,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\Sco\ActionLog\Models\ActionLogModel whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Sco\ActionLog\Models\ActionLogModel whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Sco\ActionLog\Models\ActionLogModel whereType($value)
- * @method static \Illuminate\Database\Query\Builder|\Sco\ActionLog\Models\ActionLogModel whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Sco\ActionLog\Models\ActionLogModel whereUserId($value)
  * @mixin \Eloquent
  */
 class ActionLogModel extends Model
 {
+    public $timestamps = false;
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);

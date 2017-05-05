@@ -2,6 +2,7 @@
 
 namespace Sco\ActionLog;
 
+use Carbon\Carbon;
 use Sco\ActionLog\Models\ActionLogModel;
 
 class Factory
@@ -27,11 +28,12 @@ class Factory
 
         $userKey = config('actionlog.user_foreign_key');
 
-        $log->$userKey  = $info->getUserId();
-        $log->type      = $info->getType();
-        $log->content   = is_string($content) ? $content : json_encode($content);
-        $log->client_ip = $info->getClientIp();
-        $log->client    = is_string($client) ? $client : json_encode($client);
+        $log->$userKey   = $info->getUserId();
+        $log->type       = $info->getType();
+        $log->content    = is_string($content) ? $content : json_encode($content);
+        $log->client_ip  = $info->getClientIp();
+        $log->client     = is_string($client) ? $client : json_encode($client);
+        $log->created_at = Carbon::now();
         $log->save();
 
         return true;

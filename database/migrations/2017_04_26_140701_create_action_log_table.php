@@ -34,9 +34,9 @@ class CreateActionLogTable extends Migration
             $table->string('client')
                 ->comment('客户端信息');
 
-            $table->timestamps();
+            $table->timestamp('created_at');
 
-            $table->index('user_id');
+            $table->index(config('actionlog.user_foreign_key'));
             $table->index('type');
             $table->index('created_at');
         });
