@@ -3,11 +3,11 @@
 
 namespace Sco\ActionLog;
 
-use Sco\ActionLog\Traits\HasAttributes;
+use Sco\Attributes\HasAttributesTrait;
 
 class LogInfo
 {
-    use HasAttributes;
+    use HasAttributesTrait;
 
     public function __construct(array $attributes)
     {

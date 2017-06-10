@@ -4,12 +4,11 @@
 namespace Sco\ActionLog\Events;
 
 use Illuminate\Database\Eloquent\Model;
-use Sco\ActionLog\Handlers\EventHandler;
-use Sco\ActionLog\Traits\HasAttributes;
+use Sco\Attributes\HasAttributesTrait;
 
 class BaseModelEvent extends AbstractEvent
 {
-    use HasAttributes;
+    use HasAttributesTrait;
 
     public function __construct(Model $model)
     {
