@@ -7,7 +7,7 @@ use Auth;
 use Request;
 use Sco\ActionLog\LogInfo;
 
-abstract class AbstractEvent implements EventInterface
+abstract class Event implements EventInterface
 {
     protected $type;
 

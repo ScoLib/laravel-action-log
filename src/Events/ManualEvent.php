@@ -3,7 +3,7 @@
 
 namespace Sco\ActionLog\Events;
 
-class ManualEvent extends AbstractEvent
+class ManualEvent extends Event
 {
     protected $content;
 

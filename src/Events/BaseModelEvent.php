@@ -6,7 +6,7 @@ namespace Sco\ActionLog\Events;
 use Illuminate\Database\Eloquent\Model;
 use Sco\Attributes\HasAttributesTrait;
 
-class BaseModelEvent extends AbstractEvent
+class BaseModelEvent extends Event
 {
     use HasAttributesTrait;
 
