@@ -16,7 +16,11 @@ Via Composer
 $ composer require scolib/laravel-action-log
 ```
 
-After updating composer, add the ServiceProvider to the `providers` array in `config/app.php`
+Laravel 5.5 uses Package Auto-Discovery, so doesn't require you to manually add the ServiceProvider.
+
+### Laravel 5.5.*
+
+If you don't use auto-discovery, add the ServiceProvider to the `providers` array in `config/app.php`
 
 ```php
 \Sco\ActionLog\LaravelServiceProvider::class,
@@ -27,6 +31,8 @@ If you want to use the facade to logging actions, add this to the `aliases` arra
 ```php
 'ActionLog' => Sco\ActionLog\Facade::class,
 ```
+
+## Publish config file
 
 Copy the package config to your local config with the publish command:
 
@@ -52,6 +58,9 @@ Override the property `$events` in your Model
         'created'  => \Sco\ActionLog\Events\ModelWasCreated::class,
     ];
 ```
+
+> ⚠ Note: Laravel 5.5   
+> Renamed `$events` to `$dispatchesEvents` ([#17961](https://github.com/laravel/framework/pull/17961), [b6472bf](https://github.com/laravel/framework/commit/b6472bf6fec1af6e76604aaf3f7fed665440ac66), [3dbe12f](https://github.com/laravel/framework/commit/3dbe12f16f470e3bca868576d517d57876bc50af))
 
 All available event
 
