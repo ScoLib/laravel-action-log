@@ -10,17 +10,21 @@
 
 ## Install
 
-Via Composer
+### Laravel 5.5.*
 
 ``` bash
-$ composer require scolib/laravel-action-log
+$ composer require scolib/laravel-action-log:1.3.*
 ```
 
 Laravel 5.5 uses Package Auto-Discovery, so doesn't require you to manually add the ServiceProvider.
 
-### Laravel 5.5.*
+### Laravel 5.4.*
 
-If you don't use auto-discovery, add the ServiceProvider to the `providers` array in `config/app.php`
+``` bash
+$ composer require scolib/laravel-action-log:1.2.*
+```
+
+Add the ServiceProvider to the `providers` array in `config/app.php`
 
 ```php
 \Sco\ActionLog\LaravelServiceProvider::class,
@@ -66,16 +70,16 @@ All available event
 
 ```php
 [
-    'created'   => \Sco\ActionLog\Events\ModelWasCreated::class
-    'deleted'   => \Sco\ActionLog\Events\ModelWasDeleted::class
-    'restored'  => \Sco\ActionLog\Events\ModelWasRestored::class
-    'saved'     => \Sco\ActionLog\Events\ModelWasSaved::class
-    'updated'   => \Sco\ActionLog\Events\ModelWasUpdated::class
-    'creating'  => \Sco\ActionLog\Events\ModelWillCreating::class
-    'deleting'  => \Sco\ActionLog\Events\ModelWillDeleting::class
-    'restoring' => \Sco\ActionLog\Events\ModelWillRestoring::class
-    'saving'    => \Sco\ActionLog\Events\ModelWillSaving::class
-    'updating'  => \Sco\ActionLog\Events\ModelWillUpdating::class
+    'created'   => \Sco\ActionLog\Events\ModelWasCreated::class,
+    'deleted'   => \Sco\ActionLog\Events\ModelWasDeleted::class,
+    'restored'  => \Sco\ActionLog\Events\ModelWasRestored::class,
+    'saved'     => \Sco\ActionLog\Events\ModelWasSaved::class,
+    'updated'   => \Sco\ActionLog\Events\ModelWasUpdated::class,
+    'creating'  => \Sco\ActionLog\Events\ModelWillCreating::class,
+    'deleting'  => \Sco\ActionLog\Events\ModelWillDeleting::class,
+    'restoring' => \Sco\ActionLog\Events\ModelWillRestoring::class,
+    'saving'    => \Sco\ActionLog\Events\ModelWillSaving::class,
+    'updating'  => \Sco\ActionLog\Events\ModelWillUpdating::class,
 ]
 ```
 
