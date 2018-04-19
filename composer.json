@@ -21,7 +21,7 @@
         "scolib/attributes": "~1.0"
     },
     "require-dev": {
-        "laravel/framework": "5.5.*",
+        "laravel/framework": "5.5.*|5.6.*",
         "mockery/mockery": "^0.9.9",
         "orchestra/database": "^3.4",
         "orchestra/testbench": "~3.4",
